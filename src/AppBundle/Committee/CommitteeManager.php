@@ -208,7 +208,7 @@ class CommitteeManager
                 !$this->router ? '' : $this->router->generate('app_commitee_list_members', [
                     'uuid' => $committee->getUuid()->toString(),
                     'slug' => $committee->getSlug(),
-                ])
+                ], UrlGeneratorInterface::ABSOLUTE_URL)
             ));
         }
 
