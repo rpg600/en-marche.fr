@@ -36,6 +36,12 @@ class ProcurationRequest
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ProcurationProxy", inversedBy="foundRequest")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $foundProxy;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(length=6)
@@ -335,6 +341,16 @@ class ProcurationRequest
         if ($adherent->getBirthdate()) {
             $this->birthdate = $adherent->getBirthdate();
         }
+    }
+
+    public function getFoundProxy(): ?ProcurationProxy
+    {
+        return $this->foundProxy;
+    }
+
+    public function setFoundProxy(ProcurationProxy $foundProxy = null)
+    {
+        $this->foundProxy = $foundProxy;
     }
 
     public function getId()

@@ -28,6 +28,12 @@ class ProcurationProxy
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ProcurationRequest", mappedBy="foundProxy")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $foundRequest;
+
+    /**
      * The referent who invited this proxy.
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adherent")
@@ -311,6 +317,16 @@ class ProcurationProxy
         if ($adherent->getBirthdate()) {
             $this->birthdate = $adherent->getBirthdate();
         }
+    }
+
+    public function getFoundRequest(): ?ProcurationRequest
+    {
+        return $this->foundRequest;
+    }
+
+    public function setFoundRequest(ProcurationRequest $foundRequest = null)
+    {
+        $this->foundRequest = $foundRequest;
     }
 
     public function getId()
